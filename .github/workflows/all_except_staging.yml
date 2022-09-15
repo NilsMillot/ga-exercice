@@ -7,7 +7,7 @@ on:
       - '!staging'   # excludes staging
 
 jobs:
-  print-event:
+  all-except-staging:
     runs-on: ubuntu-latest
 
     steps:

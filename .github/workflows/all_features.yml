@@ -6,7 +6,7 @@ on:
       - '/feat/**'  # matches every branch starts by feat/
 
 jobs:
-  print-event:
+  all-features:
     runs-on: ubuntu-latest
 
     steps:
