@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  print-event:
+  every-min:
     runs-on: ubuntu-latest
 
     steps:

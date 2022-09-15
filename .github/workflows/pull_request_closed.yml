@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  print-event:
+  pr-closed:
     runs-on: ubuntu-latest
 
     steps:

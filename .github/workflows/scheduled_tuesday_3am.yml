@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  print-event:
+  every-tuesday-three-am:
     runs-on: ubuntu-latest
 
     steps:

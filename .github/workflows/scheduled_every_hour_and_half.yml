@@ -5,7 +5,7 @@ on:
     - cron:  '0 0-21/3 * * *'
 
 jobs:
-  print-event:
+  every-hour-and-half:
     runs-on: ubuntu-latest
 
     steps:

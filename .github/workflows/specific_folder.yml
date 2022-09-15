@@ -9,7 +9,7 @@ on:
 
 
 jobs:
-  print-event:
+  only-specific-folder:
     runs-on: ubuntu-latest
 
     steps:
