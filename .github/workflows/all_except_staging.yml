@@ -1,0 +1,21 @@
+name: All except staging
+
+on:
+  push:
+    branches:
+      - '**'        # matches every branch
+      - '!staging'   # excludes staging
+
+jobs:
+  print-event:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print the event that triggered this workflow
+        run: |
+          echo ${{ github.event_name }}
+
+      - name: Print the current time
+        run: |
+          echo $(date)
+
