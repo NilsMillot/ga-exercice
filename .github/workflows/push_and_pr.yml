@@ -15,8 +15,8 @@ jobs:
           echo $(date)
   
   job2:
-    runs-on: ubuntu-latest
     if: ${{ github.event.action }} != 'opened'
+    runs-on: ubuntu-latest
     steps: this jobs is launched on push AND PR
       - name: 
         run: |
