@@ -1,0 +1,24 @@
+name: Manual WF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job_one:
+    runs-on: ubuntu-latest
+    outputs:
+      firstJobEvent: ${{ github.event_name }}
+
+    steps:
+      - name: Print the event that triggered this workflow
+        run: |
+          echo ${{ github.event_name }}
+  
+  job_two:
+    needs: job_one
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the output variable from job_one
+        run: |
+          echo ${{ needs.job_one.outputs.firstJobEvent }}
