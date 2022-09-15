@@ -1,0 +1,24 @@
+name: Push and PR
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: this jobs is launched ONLY on PR
+        run: |
+          echo $(date)
+  
+  job2:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action }} != 'opened'
+    steps: this jobs is launched on push AND PR
+      - name: 
+        run: |
+          echo $(date)
+
