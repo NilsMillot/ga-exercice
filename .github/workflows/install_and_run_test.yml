@@ -8,11 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        working-directory: /node-app
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-        working-directory: /node-app
       - run: npm ci
         working-directory: /node-app
       - run: npm test
@@ -26,12 +24,10 @@ jobs:
     name: Node ${{ matrix.node }} sample
     steps:
       - uses: actions/checkout@v3
-        working-directory: /node-app
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-        working-directory: /node-app
       - run: npm ci
         working-directory: /node-app
       - run: npm test
@@ -49,13 +45,11 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        working-directory: /node-app
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-        working-directory: /node-app
       - run: npm ci
         working-directory: /node-app
       - run: npm test
@@ -65,7 +59,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: docker://node:alpine
-        working-directory: /node-app
       - run: npm ci
         working-directory: /node-app
       - run: npm test
