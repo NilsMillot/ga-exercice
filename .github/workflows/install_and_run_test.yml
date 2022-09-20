@@ -6,43 +6,39 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: /node-app
     steps:
       - uses: actions/checkout@v3
+        working-directory: /node-app
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+        working-directory: /node-app
       - run: npm ci
+        working-directory: /node-app
       - run: npm test
+        working-directory: /node-app
 
   build-matrix-node-versions:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: /node-app
     strategy:
       matrix:
         node: [ 12, 14, 16 ]
     name: Node ${{ matrix.node }} sample
     steps:
       - uses: actions/checkout@v3
+        working-directory: /node-app
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
+        working-directory: /node-app
       - run: npm ci
+        working-directory: /node-app
       - run: npm test
+        working-directory: /node-app
 
   build-matrix-unbuntu-windows:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
-        working-directory: /node-app
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
@@ -53,21 +49,24 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+        working-directory: /node-app
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+        working-directory: /node-app
       - run: npm ci
+        working-directory: /node-app
       - run: npm test
+        working-directory: /node-app
   
   node-docker-image:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: /node-app
     steps:
       - uses: docker://node:alpine
+        working-directory: /node-app
       - run: npm ci
+        working-directory: /node-app
       - run: npm test
+        working-directory: /node-app
