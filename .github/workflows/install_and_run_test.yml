@@ -1,0 +1,61 @@
+name: Exos avec node-app
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - working-directory: /node-app
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm test
+
+  build-matrix-node-versions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 12, 14, 16 ]
+    name: Node ${{ matrix.node }} sample
+    steps:
+      - working-directory: /node-app
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test
+
+  build-matrix-unbuntu-windows:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        node-version: [14.x, 15.x, 16.x]
+
+    name: Node.js ${{ matrix.node-version }}
+
+    steps:
+      - working-directory: /node-app
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm test
+  
+  node-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - working-directory: /node-app
+      - uses: docker://node:alpine
+      - run: npm ci
+      - run: npm test
