@@ -6,8 +6,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /node-app
     steps:
-      - working-directory: /node-app
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -17,12 +20,15 @@ jobs:
 
   build-matrix-node-versions:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /node-app
     strategy:
       matrix:
         node: [ 12, 14, 16 ]
     name: Node ${{ matrix.node }} sample
     steps:
-      - working-directory: /node-app
       - uses: actions/checkout@v3
       - name: Setup node
         uses: actions/setup-node@v3
@@ -33,6 +39,10 @@ jobs:
 
   build-matrix-unbuntu-windows:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: /node-app
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
@@ -41,7 +51,6 @@ jobs:
     name: Node.js ${{ matrix.node-version }}
 
     steps:
-      - working-directory: /node-app
       - name: Checkout the code
         uses: actions/checkout@v2
 
@@ -54,8 +63,11 @@ jobs:
   
   node-docker-image:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: /node-app
     steps:
-      - working-directory: /node-app
       - uses: docker://node:alpine
       - run: npm ci
       - run: npm test
