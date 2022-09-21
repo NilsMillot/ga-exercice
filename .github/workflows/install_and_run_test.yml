@@ -58,6 +58,7 @@ jobs:
   node-docker-image:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: docker://node:alpine
       - run: npm install
         working-directory: ./node-app
