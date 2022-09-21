@@ -6,12 +6,13 @@ on:
 jobs:
   test:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: /node-app
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
       - run: npm ci
-        working-directory: /node-app
       - run: npm start
-        working-directory: /node-app
